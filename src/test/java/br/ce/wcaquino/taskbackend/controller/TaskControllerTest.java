@@ -40,6 +40,19 @@ public class TaskControllerTest {
 	}
 	
 	@Test
+	public void shouldNotSaveTasksWithEmptyDescription() {
+		Task todo = new Task();
+		todo.setTask("");
+		todo.setDueDate(LocalDate.now());
+		
+		try {
+			controller.save(todo);
+		} catch (ValidationException e) {
+			Assert.assertEquals("Fill the task description", e.getMessage());
+		}
+	}
+	
+	@Test
 	public void shouldNotSaveTasksWithoutDate() {
 		Task todo = new Task();
 		todo.setTask("Some Task");
