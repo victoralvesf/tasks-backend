@@ -80,7 +80,7 @@
 							<goal>report</goal>
 						</goals>
 						<configuration>
-							<destFile>${project.build.directory}/jacoco.xml</destFile>
+							<outputDirectory>${project.reporting.outputDirectory}/jacoco</outputDirectory>
 						</configuration>
 					</execution>
 				</executions>
