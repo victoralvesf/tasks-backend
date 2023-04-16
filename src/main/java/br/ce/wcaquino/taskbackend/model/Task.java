@@ -13,12 +13,14 @@ public class Task {
 	private Long id;
 	
 	@Column(nullable = false)
-	private String task;
+	private String name;
 	
 	@Column(nullable = false)
 	private LocalDate dueDate;
 	
-	public Task() {}
+	public Task() {
+		// Default constructor without arguments
+	}
 
 	@Id
 	@GeneratedValue
@@ -31,11 +33,11 @@ public class Task {
 	}
 
 	public String getTask() {
-		return task;
+		return name;
 	}
 
-	public void setTask(String task) {
-		this.task = task;
+	public void setTask(String name) {
+		this.name = name;
 	}
 	
 	public LocalDate getDueDate() {
