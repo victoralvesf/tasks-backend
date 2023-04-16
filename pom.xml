@@ -73,9 +73,19 @@
 							<goal>prepare-agent</goal>
 						</goals>
 					</execution>
+					<execution>
+						<id>report</id>
+						<phase>test</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+						<configuration>
+							<destFile>${project.build.directory}/jacoco.xml</destFile>
+						</configuration>
+					</execution>
 				</executions>
 				<configuration>
-					<destFile>${project.build.directory}/jacoco.xml</destFile>
+					<destFile>${sonar.jacoco.reportPath}</destFile>
 				</configuration>
 			</plugin>
 			<plugin>
