@@ -5,9 +5,11 @@ pipeline {
       agent {
         docker {
           image 'maven:3.9.1-amazoncorretto-8-debian'
+          args '-v /root/.m2:/root/.m2'
         }
       }
       steps {
+        cache(name: 'maven-cache', paths: ['/root/.m2'])
         sh 'mvn clean package -DskipTests=true'
       }
     }
@@ -15,9 +17,11 @@ pipeline {
       agent {
         docker {
           image 'maven:3.9.1-amazoncorretto-8-debian'
+          args '-v /root/.m2:/root/.m2'
         }
       }
       steps {
+        cache(name: 'maven-cache', paths: ['/root/.m2'])
         sh 'mvn test'
       }
       post {
@@ -67,10 +71,12 @@ pipeline {
       agent {
         docker {
           image 'maven:3.9.1-amazoncorretto-8-debian'
+          args '-v /root/.m2:/root/.m2'
         }
       }
       steps {
         dir('tasks-api-test') {
+          cache(name: 'maven-cache', paths: ['/root/.m2'])
           git 'https://github.com/victoralvesf/tasks-api-test'
           sh "mvn test -Dapi.base.url=$BACKEND_URL"
         }
@@ -80,10 +86,12 @@ pipeline {
       agent {
         docker {
           image 'maven:3.9.1-amazoncorretto-8-debian'
+          args '-v /root/.m2:/root/.m2'
         }
       }
       steps {
         dir('tasks-frontend') {
+          cache(name: 'maven-cache', paths: ['/root/.m2'])
           git 'https://github.com/victoralvesf/tasks-frontend'
           sh 'mvn clean package'
         }
