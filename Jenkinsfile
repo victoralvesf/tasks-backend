@@ -115,5 +115,18 @@ pipeline {
         }
       }
     }
+    stage ('E2E Test') {
+      agent {
+        docker {
+          image 'maven:3.9.1-amazoncorretto-8-debian'
+        }
+      }
+      steps {
+        dir('functional-test') {
+          git 'https://github.com/victoralvesf/tasks-functional-tests'
+          sh "mvn test -Dselenium.grid.hub.url=$SELENIUM_HUB_URL -Dselenium.app.url=$FRONTEND_URL"
+        }
+      }
+    }
   }
 }
