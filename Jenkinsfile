@@ -90,8 +90,14 @@ pipeline {
       }
     }
     stage ('Deploy Frontend') {
+      agent {
+        docker {
+          image 'maven:3.9.1-amazoncorretto-8-debian'
+        }
+      }
       steps {
         dir('tasks-frontend') {
+          reuseNode true
           deploy adapters: [
             tomcat8(
               credentialsId: 'login_tomcat',
