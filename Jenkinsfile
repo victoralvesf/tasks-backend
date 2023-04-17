@@ -5,7 +5,7 @@ pipeline {
       agent {
         docker {
           image 'maven:3.9.1-amazoncorretto-8-debian'
-          args '-v $HOME/.m2:/var/maven/.m2:z -e MAVEN_CONFIG=/var/maven/.m2 -e MAVEN_OPTS="-Duser.home=/var/maven"'
+          args '-u root'
         }
       }
       steps {
@@ -16,7 +16,7 @@ pipeline {
       agent {
         docker {
           image 'maven:3.9.1-amazoncorretto-8-debian'
-          args '-v $HOME/.m2:/var/maven/.m2:z -e MAVEN_CONFIG=/var/maven/.m2 -e MAVEN_OPTS="-Duser.home=/var/maven"'
+          args '-u root'
         }
       }
       steps {
@@ -69,7 +69,7 @@ pipeline {
       agent {
         docker {
           image 'maven:3.9.1-amazoncorretto-8-debian'
-          args '-v $HOME/.m2:/var/maven/.m2:z -e MAVEN_CONFIG=/var/maven/.m2 -e MAVEN_OPTS="-Duser.home=/var/maven"'
+          args '-u root'
         }
       }
       steps {
@@ -83,7 +83,7 @@ pipeline {
       agent {
         docker {
           image 'maven:3.9.1-amazoncorretto-8-debian'
-          args '-v $HOME/.m2:/var/maven/.m2:z -e MAVEN_CONFIG=/var/maven/.m2 -e MAVEN_OPTS="-Duser.home=/var/maven"'
+          args '-u root'
         }
       }
       steps {
