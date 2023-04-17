@@ -30,7 +30,7 @@ pipeline {
       steps {
         withSonarQubeEnv('SONAR_LOCAL') {
           withCredentials([string(credentialsId: 'sonar_scanner_token', variable: 'SCANNER_TOKEN')]) {
-            sh 'sonar-scanner -Dsonar.token=$SCANNER_TOKEN'
+            sh "sonar-scanner -Dsonar.token=$SCANNER_TOKEN"
           }
         }
       }
@@ -49,7 +49,7 @@ pipeline {
           tomcat8(
             credentialsId: 'login_tomcat',
             path: '',
-            url: '$PIPELINE_TOMCAT_URL'
+            url: "$PIPELINE_TOMCAT_URL"
           )
         ],
         contextPath: 'tasks-backend',
