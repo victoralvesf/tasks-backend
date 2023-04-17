@@ -1,5 +1,8 @@
 pipeline {
   agent any
+  environment {
+    JAVA_TOOL_OPTIONS = '-Duser.home=/root'
+  }
   stages {
     stage ('Build Backend') {
       agent {
