@@ -50,6 +50,11 @@ pipeline {
       }
     }
     stage ('Deploy Backend') {
+      agent {
+        docker {
+          image 'maven:3.9.1-amazoncorretto-8-debian'
+        }
+      }
       steps {
         deploy adapters: [
           tomcat8(
