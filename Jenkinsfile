@@ -76,5 +76,34 @@ pipeline {
         }
       }
     }
+    stage ('Build Frontend') {
+      agent {
+        docker {
+          image 'maven:3.9.1-amazoncorretto-8-debian'
+        }
+      }
+      steps {
+        dir('tasks-frontend') {
+          git 'https://github.com/victoralvesf/tasks-frontend'
+          sh 'mvn clean package'
+        }
+      }
+    }
+    stage ('Deploy Frontend') {
+      steps {
+        dir('tasks-frontend') {
+          deploy adapters: [
+            tomcat8(
+              credentialsId: 'login_tomcat',
+              path: '',
+              url: "$PIPELINE_TOMCAT_URL"
+            )
+          ],
+          contextPath: 'tasks',
+          onFailure: false,
+          war: 'target/tasks.war'
+        }
+      }
+    }
   }
 }
