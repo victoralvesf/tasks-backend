@@ -27,11 +27,12 @@ pipeline {
           image 'sonarsource/sonar-scanner-cli:latest'
         }
       }
+      environment {
+        SCANNER_TOKEN = credentials('sonar_scanner_token')
+      }
       steps {
         withSonarQubeEnv('SONAR_LOCAL') {
-          withCredentials([string(credentialsId: 'sonar_scanner_token', variable: 'SCANNER_TOKEN')]) {
-            sh "sonar-scanner -Dsonar.token=$SCANNER_TOKEN"
-          }
+          sh "sonar-scanner -Dsonar.token=$SCANNER_TOKEN"
         }
       }
     }
@@ -55,6 +56,19 @@ pipeline {
         contextPath: 'tasks-backend',
         onFailure: false,
         war: 'target/tasks-backend.war'
+      }
+    }
+    stage ('Api Test') {
+      agent {
+        docker {
+          image 'maven:3.9.1-amazoncorretto-8-debian'
+        }
+      }
+      steps {
+        dir('tasks-api-test') {
+          git 'https://github.com/victoralvesf/tasks-api-test'
+          sh "mvn test -Dapi.base.url=$BACKEND_URL"
+        }
       }
     }
   }
