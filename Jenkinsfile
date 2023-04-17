@@ -20,6 +20,11 @@ pipeline {
       steps {
         sh 'mvn test'
       }
+      post {
+        always {
+          junit 'target/surefire-reports/*.xml'
+        }
+      }
     }
     stage ('SonarQube Analysis') {
       agent {
@@ -70,11 +75,6 @@ pipeline {
           sh "mvn test -Dapi.base.url=$BACKEND_URL"
         }
       }
-    }
-  }
-  post {
-    always {
-      junit 'target/surefire-reports/*.xml'
     }
   }
 }
