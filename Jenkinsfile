@@ -5,7 +5,6 @@ pipeline {
       agent {
         docker {
           image 'maven:3.9.1-amazoncorretto-8-debian'
-          args '-v $HOME/.m2:/root/.m2'
         }
       }
       steps {
@@ -16,7 +15,6 @@ pipeline {
       agent {
         docker {
           image 'maven:3.9.1-amazoncorretto-8-debian'
-          args '-v $HOME/.m2:/root/.m2'
         }
       }
       steps {
@@ -69,7 +67,6 @@ pipeline {
       agent {
         docker {
           image 'maven:3.9.1-amazoncorretto-8-debian'
-          args '-v $HOME/.m2:/root/.m2'
         }
       }
       steps {
@@ -83,7 +80,6 @@ pipeline {
       agent {
         docker {
           image 'maven:3.9.1-amazoncorretto-8-debian'
-          args '-v $HOME/.m2:/root/.m2'
         }
       }
       steps {
