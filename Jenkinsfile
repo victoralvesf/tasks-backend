@@ -15,5 +15,17 @@ pipeline {
         sh 'mvn test'
       }
     }
+    stage ('SonarQube Analysis') {
+      agent {
+        docker {
+          image 'sonarsource/sonar-scanner-cli:latest'
+        }
+      }
+      steps {
+        withCredentials([string(credentialsId: 'sonar_scanner_token', variable: 'SCANNER_TOKEN')]) {
+          sh 'sonar-scanner -Dsonar.login=$SCANNER_TOKEN'
+        }
+      }
+    }
   }
 }
