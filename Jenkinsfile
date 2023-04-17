@@ -1,16 +1,21 @@
 pipeline {
-  agent {
-    docker {
-      image 'maven:3.9.1-amazoncorretto-8-debian'
-    }
-  }
   stages {
     stage ('Build Backend') {
+      agent {
+        docker {
+          image 'maven:3.9.1-amazoncorretto-8-debian'
+        }
+      }
       steps {
         sh 'mvn clean package -DskipTests=true'
       }
     }
     stage ('Unit Tests') {
+      agent {
+        docker {
+          image 'maven:3.9.1-amazoncorretto-8-debian'
+        }
+      }
       steps {
         sh 'mvn test'
       }
