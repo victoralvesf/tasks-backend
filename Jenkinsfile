@@ -49,7 +49,7 @@ pipeline {
           tomcat8(
             credentialsId: 'login_tomcat',
             path: '',
-            url: 'http://192.168.0.220:8008'
+            url: '$PIPELINE_TOMCAT_URL'
           )
         ],
         contextPath: 'tasks-backend',
