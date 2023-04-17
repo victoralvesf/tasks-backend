@@ -28,18 +28,18 @@ pipeline {
         }
       }
       steps {
-        withCredentials([string(credentialsId: 'sonar_scanner_token', variable: 'SCANNER_TOKEN')]) {
-          sh 'sonar-scanner -Dsonar.token=$SCANNER_TOKEN'
+        withSonarQubeEnv('SONAR_LOCAL') {
+          withCredentials([string(credentialsId: 'sonar_scanner_token', variable: 'SCANNER_TOKEN')]) {
+            sh 'sonar-scanner -Dsonar.token=$SCANNER_TOKEN'
+          }
         }
       }
     }
     stage ('Quality Gate') {
       steps {
-        withSonarQubeEnv('SONAR_LOCAL') {
-          sleep(5)
-          timeout(time: 1, unit: 'MINUTES') {
-            waitForQualityGate abortPipeline: true
-          }
+        sleep(5)
+        timeout(time: 1, unit: 'MINUTES') {
+          waitForQualityGate abortPipeline: true
         }
       }
     }
