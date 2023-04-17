@@ -12,7 +12,6 @@ pipeline {
         }
       }
       steps {
-        cache(name: 'maven-cache', paths: ['/root/.m2'])
         sh 'mvn clean package -DskipTests=true'
       }
     }
@@ -24,7 +23,6 @@ pipeline {
         }
       }
       steps {
-        cache(name: 'maven-cache', paths: ['/root/.m2'])
         sh 'mvn test'
       }
       post {
@@ -79,7 +77,6 @@ pipeline {
       }
       steps {
         dir('tasks-api-test') {
-          cache(name: 'maven-cache', paths: ['/root/.m2'])
           git 'https://github.com/victoralvesf/tasks-api-test'
           sh "mvn test -Dapi.base.url=$BACKEND_URL"
         }
@@ -94,7 +91,6 @@ pipeline {
       }
       steps {
         dir('tasks-frontend') {
-          cache(name: 'maven-cache', paths: ['/root/.m2'])
           git 'https://github.com/victoralvesf/tasks-frontend'
           sh 'mvn clean package'
         }
