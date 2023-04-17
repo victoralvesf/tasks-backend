@@ -32,7 +32,7 @@ pipeline {
       }
       steps {
         withSonarQubeEnv('SONAR_LOCAL') {
-          sh "sonar-scanner -Dsonar.token=$SCANNER_TOKEN"
+          sh 'sonar-scanner -Dsonar.token=$SCANNER_TOKEN'
         }
       }
     }
