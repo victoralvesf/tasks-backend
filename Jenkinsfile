@@ -97,7 +97,6 @@ pipeline {
       }
       steps {
         dir('tasks-frontend') {
-          reuseNode true
           deploy adapters: [
             tomcat8(
               credentialsId: 'login_tomcat',
