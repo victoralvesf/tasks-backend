@@ -22,7 +22,7 @@ pipeline {
       }
       post {
         always {
-          junit 'target/surefire-reports/*.xml'
+          junit allowEmptyResults: true, testResults 'target/surefire-reports/*.xml'
         }
       }
     }
@@ -80,6 +80,11 @@ pipeline {
           sh "mvn test -Dapi.base.url=$BACKEND_URL"
         }
       }
+      post {
+        always {
+          junit allowEmptyResults: true, testResults 'target/surefire-reports/*.xml'
+        }
+      }
     }
     stage ('Build Frontend') {
       agent {
@@ -125,6 +130,11 @@ pipeline {
         dir('functional-test') {
           git 'https://github.com/victoralvesf/tasks-functional-tests'
           sh "mvn test -Dselenium.grid.hub.url=$SELENIUM_HUB_URL -Dselenium.app.url=$FRONTEND_URL"
+        }
+      }
+      post {
+        always {
+          junit allowEmptyResults: true, testResults 'target/surefire-reports/*.xml'
         }
       }
     }
